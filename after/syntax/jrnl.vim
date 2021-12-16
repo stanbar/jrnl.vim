@@ -26,7 +26,7 @@ syntax match NoSpellUrl '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
 syntax match NoSpellApostrophe '\'s' contains=@NoSpell
 syntax match jLeadingWhiteSpace /\v^.{-}\] +/ contained
 
-syntax region JrnlEntryLine start='\v^\[\d{4}(-\d\d){2} \d?\d(:[0-6]\d){1,2}( [apAP][mM])?\]' end=/$/ display
+syntax region JrnlEntryLine start='\v^\[\d{4}(-\d\d){2}\]' end=/$/ display
   \ contains=JrnlDate,jseasoneptitle,JrnlTag,Spell
 syntax region JrnlBoxDone start=/^\v\z(\s+)*- \[[xc]\]\s+/ end=/\v^(\z1\s(\s+- \[ \])@!|$)@!/
 syntax region JrnlBoxEmpty start=/^\v\s*- \[ \]\s+/ end=/$/
