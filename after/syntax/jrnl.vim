@@ -2,11 +2,48 @@ if exists("b:current_syntax")
   finish
 endif
 
-syntax match jtag "@.\{-}\w\+"
-syntax match jyear /\d\{4}.\d\d.\d\d/
-syntax region entryLine start=/\d\{4}.\d\d.\d\d/ end=/$/ contains=jyearhighlight 
-highlight def link jtag Constanthighlight 
-highlight def link jyear Identifierhighlight 
-highlight def entryLine ctermfg=250 guifg=Graylet 
+
+highlight JrnlTag guifg=#F8CC7A
+highlight JrnlEntryLine guifg=#66C9FF guibg=none gui=bold,underline
+highlight JrnlDate guifg=#545454 guibg=none
+highlight JrnlNope guifg=none guibg=none gui=none
+highlight JrnlSpoilers guibg=#000000
+highlight JrnlBoxEmpty guifg=#CBE697
+highlight JrnlBoxActive guifg=#CBE697 gui=reverse
+highlight JrnlBoxDone guifg=#545454 gui=strikethrough
+highlight JrnlBoxQuestion guifg=#B283AF
+highlight JrnlBoxInfo guifg=#9CDBFC
+highlight JrnlBoxImportant guifg=#EA9073 gui=bold,reverse
+highlight JrnlBoxStar guifg=#EEC476 gui=bold,reverse
+
+syntax match JrnlTag /@.\{-}\w\+/ display
+syntax match jseasoneptitle /s\d\de\d\d/ contains=@NoSpell contained display
+syntax match jseasonepbody /s\d\de\d\d/ contains=@NoSpell display
+syntax match jNumByNum /\v<\d+x\d+>/ contains=@NoSpell display
+syntax match jbracket /\v[\[\]]/ contained conceal display
+syntax match JrnlDate /\v\[\d{4}(.\d\d){2}\] / contained conceal display
+syntax match NoSpellUrl '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
+syntax match NoSpellApostrophe '\'s' contains=@NoSpell
+syntax match jLeadingWhiteSpace /\v^.{-}\] +/ contained
+
+syntax region JrnlEntryLine start='\v^\[\d{4}(.\d\d){2}\]' end=/$/ display
+  \ contains=JrnlDate,jseasoneptitle,JrnlTag,Spell
+syntax region JrnlBoxDone start=/^\v\z(\s+)*- \[[xc]\]\s+/ end=/\v^(\z1\s(\s+- \[ \])@!|$)@!/
+syntax region JrnlBoxEmpty start=/^\v\s*- \[ \]\s+/ end=/$/
+syntax region JrnlBoxActive start=/^\v\s*- \[\.\]\s+/ end=/$/ contains=jLeadingWhiteSpace
+syntax region JrnlBoxQuestion start=/^\v\s*- \[\?\]\s+/ end=/$/
+syntax region JrnlBoxInfo start=/^\v\s*- \[i\]\s+/ end=/$/
+syntax region JrnlBoxImportant start=/\v^\s*- \[!\]\s+/ end=/$/ contains=jLeadingWhiteSpace
+syntax region JrnlBoxStar start=/\v^\s*- \[\*\]/ end=/$/ contains=jLeadingWhiteSpace
+syntax region JrnlSpoilers matchgroup=jspoilers start=/||/ end=/||/ concealends contains=@Spell,jseasonepbody
+
+highlight def link jlbracket JrnlDate
+highlight def link jseasoneptitle JrnlEntryLine
+highlight def link jspoilers JrnlSpoilers
+
+" Nopes
+" highlight def link jseasonepbody JrnlNope
+highlight def link jLeadingWhiteSpace JrnlNope
+
 
 let b:current_syntax = 'jrnl'
