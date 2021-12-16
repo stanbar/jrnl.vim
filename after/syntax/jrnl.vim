@@ -21,7 +21,7 @@ syntax match jseasoneptitle /s\d\de\d\d/ contains=@NoSpell contained display
 syntax match jseasonepbody /s\d\de\d\d/ contains=@NoSpell display
 syntax match jNumByNum /\v<\d+x\d+>/ contains=@NoSpell display
 syntax match jbracket /\v[\[\]]/ contained conceal display
-syntax match JrnlDate /\v\[\d{4}(-\d\d){2} \d\d(:\d\d){1,2}( [aApP][mM])?\] / contained conceal display
+syntax match JrnlDate /\v\[\d{4}(.\d\d){2}] / contained conceal display
 syntax match NoSpellUrl '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
 syntax match NoSpellApostrophe '\'s' contains=@NoSpell
 syntax match jLeadingWhiteSpace /\v^.{-}\] +/ contained
