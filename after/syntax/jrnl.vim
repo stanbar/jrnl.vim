@@ -37,7 +37,7 @@ syntax region JrnlBoxImportant start=/\v^\s*- \[!\]\s+/ end=/$/ contains=jLeadin
 syntax region JrnlBoxStar start=/\v^\s*- \[\*\]/ end=/$/ contains=jLeadingWhiteSpace
 syntax region JrnlSpoilers matchgroup=jspoilers start=/||/ end=/||/ concealends contains=@Spell,jseasonepbody
 
-highlight def link jlbracket JrnlDate
+highlight def link jbracket JrnlDate
 highlight def link jseasoneptitle JrnlEntryLine
 highlight def link jspoilers JrnlSpoilers
 
